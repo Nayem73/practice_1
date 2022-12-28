@@ -1,0 +1,105 @@
+<!-- FIRST PRACTICE -->
+<!-- <p *ngFor="let tempVehicle of vehicles">
+    {{ tempVehicle.name }}: {{ tempVehicle.unitPrice | currency: 'TK'}}
+</p> -->
+
+<!-- SECOND PRACTICE = TABLE -->
+<!-- <table class="table">
+
+    <thead class="thead-dark">
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Units in Stock</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let tempVehicle of vehicles">
+            <td class="align-middle">
+                <img src="{{ tempVehicle.imageUrl }}" height="50" />
+            </td>
+            <td class="align-middle">{{ tempVehicle.name }}</td>
+            <td class="align-middle">{{ tempVehicle.unitPrice | currency: 'TK'}}</td>
+            <td class="align-middle">{{ tempVehicle.unitsInStock }}</td>
+            <td class="align-middle">{{ tempVehicle.unitsInStock }}</td>
+        </tr>
+    </tbody>
+
+</table> -->
+
+<!-- 3RD PRACTICE = GRID -->
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row">
+
+                <!-- loop over the collection of vehicles -->
+                <div *ngFor="let tempVehicle of vehicles" class="col-md-3">
+                    
+                    <div class="vehicle-box">
+                        
+                        <a routerLink="/vehicles/{{ tempVehicle.id }}">
+                            <img src="{{ tempVehicle.imageUrl }}" class="img-responsive">
+                        </a>
+
+                        <a class="noline" routerLink="/vehicles/{{ tempVehicle.id }}">
+                            <h1>{{ tempVehicle.name }}</h1>
+                        </a>
+
+                        <div class="price">{{ tempVehicle.unitPrice | currency: 'TK ' }}</div>
+                        <!-- <a href="#" class="primary-btn">Rent Now!</a> -->
+                        <button (click)="addToRent(tempVehicle)" class="btn btn-primary btn-sm">Rent Now!</button>
+                    </div>
+
+                </div>
+
+                <!-- if no vehicles are found after search then display a message -->
+                <div *ngIf="vehicles?.length == 0" class="alert alert-warning col-md-12" role="alert">
+                    No vehicles found.
+                </div>
+
+            </div>
+
+            <!-- begin footer -->
+            <div class="footer-pagination">
+                <div class="row">
+                    <div class="col-md-6"></div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-9" style="padding-left: 30%">
+                                <ngb-pagination [(page)]="thePageNumber"
+                                                [pageSize]="thePageSize"
+                                                [collectionSize]="theTotalElements"
+                                                [maxSize]="5"
+                                                [boundaryLinks]="true"
+                                                (pageChange)="listVehicles()">
+
+                                </ngb-pagination>
+                            </div>
+
+                            <!-- now for drop down -->
+                            <div class="col-md-3 mt-2" style="text-align: right;">
+                                <span class="mr-2">Page Size</span>
+
+                                <!-- <select (change)="updatePageSize($event.target.value)"> --> <!-- this line does not work on latest Angular -->
+                                <select (change)="updatePageSize($any($event.target).value)">
+                                    <option selected="true">5</option>
+                                    <option>10</option>
+                                    <option>20</option>
+                                    <option>50</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- end footer -->
+
+        </div>
+    </div>
+</div>

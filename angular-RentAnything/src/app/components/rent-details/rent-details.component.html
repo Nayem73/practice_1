@@ -1,0 +1,116 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            
+            <div *ngIf="rentItems.length > 0">
+
+
+            <table class="table table-bordered">               
+                <thead> 
+                <tr>
+                    <th width="20%">Vehicle Image</th>
+                    <th width="40%">Vehicle Detail</th>
+                    <th width="20%"></th>
+                    <th width="20%"></th>
+                </tr>
+                </thead>
+    <!-- added extra thead & tbody for column line to work -->
+                <tbody>
+                <tr *ngFor="let tempRentItem of rentItems">
+                    <td>
+                        <img src="{{ tempRentItem.imageUrl }}" class="img-responsive" width="200px" />
+                    </td>
+                    <td>
+                        <p>{{ tempRentItem.name }}</p>
+                        <p>{{ tempRentItem.unitPrice | currency: 'TK '}}</p>
+                    </td>
+                    <td>
+                        <div class="items">
+                            <label>Number of Vehicles:</label>
+
+                            <div class="row no-gutters">
+                                <div class="col">
+                                    <button (click)="incrementQuantity(tempRentItem)" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+
+                                <div class="col ml-4 mr-2">
+                                    {{ tempRentItem.quantity }}
+                                </div>
+
+                                <div class="col">
+                                    <button (click)="decrementQuantity(tempRentItem)" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+
+                                <div class="col-8"></div>
+                            </div>
+
+                        </div>
+
+                        <button (click)="remove(tempRentItem)" class="btn btn-primary btn-sm mt-2">Remove</button>
+
+                        <!-- <p class="mt-2">Cost: {{ tempRentItem.quantity * tempRentItem.unitPrice | currency: 'TK ' }} </p> -->
+                    </td>
+
+
+                    <td>
+                        <div class="items">
+                            <label>Number of Days for Rent:</label>
+
+                            <div class="row no-gutters">
+                                <div class="col">
+                                    <button (click)="incrementDays(tempRentItem)" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+
+                                <div class="col ml-4 mr-2">
+                                    {{ tempRentItem.days }}
+                                    
+                                </div>
+
+                                <div class="col">
+                                    <button (click)="decrementDays(tempRentItem)" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+
+                                <div class="col-8"></div>
+                            </div>
+
+                        </div>
+
+                        <!-- <button (click)="remove(tempRentItem)" class="btn btn-primary btn-sm mt-2">Remove</button> -->
+
+                        <p class="mt-2">Cost: {{ tempRentItem.quantity*tempRentItem.days * tempRentItem.unitPrice | currency: 'TK ' }} 
+                            for {{tempRentItem.quantity}} vehicle.
+                        </p>
+                    </td>
+
+
+
+                </tr>
+
+                <tr>
+                    <td colspan="3"></td>
+                    <td style="font-weight: bold">
+                        <p>Total Vehicles: {{ totalQuantity }}</p>
+                        <!-- <p>Total Days: {{ totalDays*totalQuantity }}</p> -->
+                        <p>Total Price: {{ totalPrice | currency: 'TK ' }}</p>
+                        <a routerLink="/checkout" class="btn btn-primary">Proceed for Payment</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            </div>
+            <div *ngIf="rentItems.length == 0" class="alert alert-warning col-md-12" role="alert">
+                No vehicle is selected to Rent.
+            </div>
+
+        </div>
+    </div>
+</div>

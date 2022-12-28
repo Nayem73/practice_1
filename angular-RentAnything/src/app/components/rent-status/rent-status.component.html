@@ -1,0 +1,9 @@
+<div class="cart-area d-n">
+    <a routerLink="/rent-details">
+        <!-- <div class="total">19.22 <span> 2</span> </div> <i class="fa fa-shopping-cart" aria-hidden="true"></i> -->
+        <div class="total">{{ totalPrice | currency: 'TK ' }}
+            <span> {{ totalQuantity }} </span>
+        </div>
+        <i class="fa-solid fa-car" aria-hidden="true"></i>
+    </a>
+</div>

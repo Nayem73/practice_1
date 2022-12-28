@@ -1,0 +1,17 @@
+<div class="detail-section">
+    <div class="container-fluid">
+
+        <img src="{{ vehicle.imageUrl }}" class="detail-img">
+
+        <h3>{{ vehicle.name }}</h3>
+        <div class="price">{{ vehicle.unitPrice | currency:'TK ' }}</div>
+        <button (click)="addToRent()" class="btn btn-primary btn-sm">Rent Now!</button>
+
+        <hr>
+        <h4>Description</h4>
+        <p>{{ vehicle.description }}</p>
+
+        <a routerLink="/vehicles" class="mt-5">Back to Vehicle List</a>
+
+    </div>
+</div>
